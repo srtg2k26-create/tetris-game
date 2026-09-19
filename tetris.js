@@ -1099,6 +1099,67 @@ function update(time = 0) {
    START GAME
 ========================================================= */
 
-restartGame();
+let gameStarted = false;
 
-update();
+
+function startGame() {
+
+    if (gameStarted)
+        return;
+
+
+    gameStarted = true;
+
+
+    const startScreen =
+        document.getElementById(
+            "startScreen"
+        );
+
+
+    if (startScreen) {
+
+        startScreen.style.display =
+            "none";
+
+    }
+
+
+    restartGame();
+
+    update();
+
+}
+
+
+/* =========================================================
+   TAP TO START
+========================================================= */
+
+const startScreen =
+    document.getElementById(
+        "startScreen"
+    );
+
+
+if (startScreen) {
+
+    startScreen.addEventListener(
+        "click",
+        startGame
+    );
+
+
+    startScreen.addEventListener(
+        "touchstart",
+        function(event) {
+
+            event.preventDefault();
+
+            startGame();
+
+        },
+        { passive: false }
+    );
+
+}
