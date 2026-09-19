@@ -538,3 +538,94 @@ body {
         font-size: 22px;
     }
 }
+/* =========================================================
+   TAP TO START SCREEN
+========================================================= */
+
+.start-screen {
+    position: fixed;
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0.92);
+
+    backdrop-filter: blur(8px);
+
+    cursor: pointer;
+}
+
+
+.start-content {
+    text-align: center;
+
+    animation: startPulse 1.5s infinite;
+}
+
+
+.start-icon {
+    font-size: 70px;
+
+    margin-bottom: 15px;
+}
+
+
+.start-content h1 {
+    margin: 0;
+
+    font-size: 48px;
+
+    letter-spacing: 8px;
+}
+
+
+.start-content p {
+    margin-top: 20px;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+}
+
+
+.tap-animation {
+    margin-top: 25px;
+
+    font-size: 50px;
+
+    animation: tapMove 1s infinite;
+}
+
+
+@keyframes startPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.04);
+    }
+
+}
+
+
+@keyframes tapMove {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(10px);
+    }
+
+}
