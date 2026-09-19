@@ -375,40 +375,62 @@ function merge(
 
 
 /* =========================================================
-   ROTATE
+   ROTATE MATRIX
 ========================================================= */
 
 function rotateMatrix(matrix) {
 
+    /*
+       Rotate the piece clockwise.
+
+       IMPORTANT:
+       The piece itself does NOT change identity.
+
+       L stays L
+       J stays J
+       T stays T
+       S stays S
+       Z stays Z
+       I stays I
+       O stays O
+
+       This rotation also works correctly with
+       rectangular matrices such as 2x3 and 1x4.
+    */
+
+
+    const rows = matrix.length;
+
+    const cols = matrix[0].length;
+
+
+    const rotated = Array.from(
+        { length: cols },
+        () => Array(rows).fill(0)
+    );
+
+
     for (
         let y = 0;
-        y < matrix.length;
-        ++y
+        y < rows;
+        y++
     ) {
 
         for (
             let x = 0;
-            x < y;
-            ++x
+            x < cols;
+            x++
         ) {
 
-            [
-                matrix[x][y],
-                matrix[y][x]
-            ] =
-            [
-                matrix[y][x],
-                matrix[x][y]
-            ];
+            rotated[x][rows - 1 - y] =
+                matrix[y][x];
 
         }
 
     }
 
 
-    matrix.forEach(
-        row => row.reverse()
-    );
+    return rotated;
 
 }
 
@@ -423,6 +445,11 @@ function rotatePiece() {
         return;
 
 
+    /*
+       Save the original matrix
+       in case the rotation is invalid.
+    */
+
     const oldMatrix =
         currentPiece.matrix
             .map(row => [...row]);
@@ -432,10 +459,28 @@ function rotatePiece() {
         currentPiece.x;
 
 
-    rotateMatrix(
-        currentPiece.matrix
-    );
+    /*
+       Create the rotated version.
+    */
 
+    const rotatedMatrix =
+        rotateMatrix(
+            currentPiece.matrix
+        );
+
+
+    /*
+       Apply the rotation.
+    */
+
+    currentPiece.matrix =
+        rotatedMatrix;
+
+
+    /*
+       Try to move the piece slightly
+       if it touches a wall or another block.
+    */
 
     let offset = 1;
 
@@ -449,6 +494,7 @@ function rotatePiece() {
 
         currentPiece.x += offset;
 
+
         offset =
             -(offset + (
                 offset > 0
@@ -457,16 +503,25 @@ function rotatePiece() {
             ));
 
 
+        /*
+           If there is no valid position,
+           restore the original piece.
+        */
+
         if (
             offset >
             currentPiece.matrix[0].length
         ) {
 
             currentPiece.matrix =
-                oldMatrix;
+                oldMatrix.map(
+                    row => [...row]
+                );
+
 
             currentPiece.x =
                 oldX;
+
 
             return;
 
@@ -486,7 +541,9 @@ function moveLeft() {
     if (!gameRunning)
         return;
 
+
     currentPiece.x--;
+
 
     if (
         collide(
@@ -511,7 +568,9 @@ function moveRight() {
     if (!gameRunning)
         return;
 
+
     currentPiece.x++;
+
 
     if (
         collide(
@@ -569,10 +628,12 @@ function hardDrop() {
         return;
 
 
-    while (!collide(
-        board,
-        currentPiece
-    )) {
+    while (
+        !collide(
+            board,
+            currentPiece
+        )
+    ) {
 
         currentPiece.y++;
 
@@ -580,6 +641,7 @@ function hardDrop() {
 
 
     currentPiece.y--;
+
 
     lockPiece();
 
@@ -616,6 +678,7 @@ function clearLines() {
 
 
     outer:
+
     for (
         let y = ROWS - 1;
         y >= 0;
@@ -650,6 +713,7 @@ function clearLines() {
 
         y++;
 
+
         cleared++;
 
     }
@@ -665,8 +729,11 @@ function clearLines() {
         const points = {
 
             1: 100,
+
             2: 300,
+
             3: 500,
+
             4: 800
 
         };
@@ -686,6 +753,7 @@ function clearLines() {
         dropInterval =
             Math.max(
                 100,
+
                 800 -
                 (level - 1) * 60
             );
@@ -739,6 +807,7 @@ function drawNext() {
     nextCtx.fillStyle =
         "#050505";
 
+
     nextCtx.fillRect(
         0,
         0,
@@ -759,30 +828,41 @@ function drawNext() {
 
 
     const width =
-        matrix[0].length * size;
+        matrix[0].length *
+        size;
 
 
     const height =
-        matrix.length * size;
+        matrix.length *
+        size;
 
 
     const offsetX =
-        (nextCanvas.width - width)
+        (
+            nextCanvas.width -
+            width
+        )
         / 2 / size;
 
 
     const offsetY =
-        (nextCanvas.height - height)
+        (
+            nextCanvas.height -
+            height
+        )
         / 2 / size;
 
 
     drawMatrix(
         matrix,
+
         {
             x: offsetX,
             y: offsetY
         },
+
         nextCtx,
+
         size
     );
 
@@ -857,13 +937,18 @@ function restartGame() {
 
     score = 0;
 
+
     lines = 0;
+
 
     level = 1;
 
+
     dropCounter = 0;
 
+
     dropInterval = 800;
+
 
     gameRunning = true;
 
@@ -876,6 +961,7 @@ function restartGame() {
 
 
     currentPiece = null;
+
 
     nextPiece = null;
 
