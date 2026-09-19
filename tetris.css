@@ -1,0 +1,540 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+html,
+body {
+
+    width: 100%;
+    height: 100%;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #050505;
+
+    color: white;
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.game-page {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #222 0%,
+            #090909 60%,
+            #000 100%
+        );
+
+    padding: 15px;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.game-header {
+
+    width: min(900px, 100%);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 15px;
+}
+
+
+.game-header h1 {
+
+    font-size: 30px;
+
+    letter-spacing: 4px;
+
+    color: white;
+
+    text-shadow:
+        0 0 10px #00ffc8;
+}
+
+
+.home-button,
+.restart-button {
+
+    border: none;
+
+    background: #161616;
+
+    color: white;
+
+    border: 1px solid #333;
+
+    border-radius: 10px;
+
+    padding: 10px 15px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+
+.home-button:hover,
+.restart-button:hover {
+
+    background: #242424;
+
+    border-color: #00ffc8;
+
+    color: #00ffc8;
+}
+
+
+/* =========================
+   LAYOUT
+========================= */
+
+.game-layout {
+
+    display: flex;
+
+    gap: 25px;
+
+    align-items: flex-start;
+
+    justify-content: center;
+
+    width: 100%;
+}
+
+
+/* =========================
+   BOARD
+========================= */
+
+.game-board-container {
+
+    position: relative;
+
+    background: #111;
+
+    padding: 8px;
+
+    border: 3px solid #333;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 0 25px rgba(0, 255, 200, 0.15);
+}
+
+
+#gameCanvas {
+
+    display: block;
+
+    width: 300px;
+    height: 600px;
+
+    background: #050505;
+}
+
+
+/* =========================
+   GAME INFO
+========================= */
+
+.game-info {
+
+    width: 180px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+.info-box,
+.next-box {
+
+    background: #111;
+
+    border: 1px solid #333;
+
+    border-radius: 12px;
+
+    padding: 15px;
+
+    text-align: center;
+}
+
+
+.info-box h3,
+.next-box h3 {
+
+    color: #00ffc8;
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 8px;
+}
+
+
+.info-box div {
+
+    font-size: 28px;
+
+    font-weight: bold;
+}
+
+
+#nextCanvas {
+
+    background: #050505;
+
+    margin-top: 5px;
+
+    border-radius: 5px;
+}
+
+
+.controls-desktop {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    color: #aaa;
+
+    font-size: 12px;
+
+    text-align: center;
+
+    line-height: 1.4;
+}
+
+
+.controls-desktop p {
+
+    color: white;
+
+    font-weight: bold;
+
+    margin-bottom: 3px;
+}
+
+
+/* =========================
+   MOBILE SCORE
+========================= */
+
+.score-mobile {
+
+    display: none;
+}
+
+
+/* =========================
+   GAME OVER
+========================= */
+
+.game-over {
+
+    position: absolute;
+
+    inset: 8px;
+
+    background:
+        rgba(0, 0, 0, 0.88);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+.game-over h2 {
+
+    color: #ff4444;
+
+    font-size: 35px;
+
+    margin-bottom: 15px;
+
+    text-shadow:
+        0 0 15px red;
+}
+
+
+.game-over p {
+
+    color: #aaa;
+
+    margin-bottom: 5px;
+}
+
+
+.game-over strong {
+
+    font-size: 35px;
+
+    margin-bottom: 20px;
+}
+
+
+.game-over button {
+
+    padding: 13px 25px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #00ffc8;
+
+    color: #001b18;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+.hidden {
+
+    display: none !important;
+}
+
+
+/* =========================
+   MOBILE CONTROLS
+========================= */
+
+.mobile-controls {
+
+    display: none;
+}
+
+
+/* =========================
+   TABLET / MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    .game-page {
+
+        padding: 8px;
+
+        justify-content: flex-start;
+    }
+
+
+    .game-header {
+
+        margin-bottom: 8px;
+    }
+
+
+    .game-header h1 {
+
+        font-size: 23px;
+
+        letter-spacing: 2px;
+    }
+
+
+    .home-button,
+    .restart-button {
+
+        padding: 8px 10px;
+
+        font-size: 12px;
+    }
+
+
+    .game-layout {
+
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 8px;
+    }
+
+
+    .game-board-container {
+
+        padding: 5px;
+    }
+
+
+    #gameCanvas {
+
+        width: min(90vw, 300px);
+
+        height: auto;
+
+        aspect-ratio: 1 / 2;
+    }
+
+
+    .game-info {
+
+        display: none;
+    }
+
+
+    .score-mobile {
+
+        width: 100%;
+
+        display: flex;
+
+        justify-content: space-around;
+
+        background: #111;
+
+        border-radius: 8px;
+
+        padding: 5px;
+
+        margin-bottom: 5px;
+
+        font-size: 10px;
+
+        color: #aaa;
+    }
+
+
+    .score-mobile div {
+
+        text-align: center;
+    }
+
+
+    .score-mobile strong {
+
+        display: block;
+
+        color: #00ffc8;
+
+        font-size: 16px;
+    }
+
+
+    .mobile-controls {
+
+        width: min(400px, 100%);
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(4, 1fr);
+
+        gap: 7px;
+
+        margin-top: 8px;
+    }
+
+
+    .mobile-controls button {
+
+        min-height: 55px;
+
+        border: none;
+
+        border-radius: 12px;
+
+        background: #181818;
+
+        color: white;
+
+        border: 1px solid #333;
+
+        font-size: 25px;
+
+        font-weight: bold;
+
+        touch-action: manipulation;
+    }
+
+
+    .mobile-controls button:active {
+
+        background: #00ffc8;
+
+        color: #001b18;
+
+        transform: scale(0.95);
+    }
+
+
+    .mobile-controls .drop-button {
+
+        grid-column: span 4;
+
+        min-height: 45px;
+
+        font-size: 18px;
+    }
+}
+
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media (max-width: 380px) {
+
+    .game-header h1 {
+
+        font-size: 19px;
+    }
+
+
+    #gameCanvas {
+
+        width: min(86vw, 270px);
+    }
+
+
+    .mobile-controls button {
+
+        min-height: 48px;
+
+        font-size: 22px;
+    }
+}

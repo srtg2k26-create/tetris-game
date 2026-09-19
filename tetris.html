@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <title>🎮 Tetris</title>
+
+    <link rel="stylesheet" href="tetris.css">
+
+</head>
+
+
+<body>
+
+
+<div class="game-page">
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header class="game-header">
+
+        <button class="home-button" onclick="goHome()">
+            🏠 HOME
+        </button>
+
+        <h1>🎮 TETRIS</h1>
+
+        <button class="restart-button" onclick="restartGame()">
+            🔄
+        </button>
+
+    </header>
+
+
+    <!-- =========================
+         GAME AREA
+    ========================== -->
+
+    <main class="game-layout">
+
+
+        <!-- LEFT SIDE -->
+
+        <section class="game-board-container">
+
+            <div class="score-mobile">
+
+                <div>
+                    SCORE
+                    <strong id="scoreMobile">0</strong>
+                </div>
+
+                <div>
+                    LEVEL
+                    <strong id="levelMobile">1</strong>
+                </div>
+
+            </div>
+
+
+            <canvas
+                id="gameCanvas"
+                width="300"
+                height="600">
+            </canvas>
+
+
+            <!-- GAME OVER -->
+
+            <div
+                id="gameOver"
+                class="game-over hidden">
+
+                <h2>GAME OVER</h2>
+
+                <p>Score</p>
+
+                <strong id="finalScore">0</strong>
+
+                <button onclick="restartGame()">
+                    PLAY AGAIN
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- RIGHT SIDE -->
+
+        <aside class="game-info">
+
+
+            <div class="info-box">
+
+                <h3>SCORE</h3>
+
+                <div id="score">
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <h3>LINES</h3>
+
+                <div id="lines">
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <h3>LEVEL</h3>
+
+                <div id="level">
+                    1
+                </div>
+
+            </div>
+
+
+            <div class="next-box">
+
+                <h3>NEXT</h3>
+
+                <canvas
+                    id="nextCanvas"
+                    width="120"
+                    height="120">
+                </canvas>
+
+            </div>
+
+
+            <div class="controls-desktop">
+
+                <p>⌨️ KEYBOARD</p>
+
+                <span>← → Move</span>
+                <span>↓ Drop</span>
+                <span>↑ Rotate</span>
+                <span>SPACE Hard Drop</span>
+
+            </div>
+
+
+        </aside>
+
+    </main>
+
+
+    <!-- =========================
+         MOBILE CONTROLS
+    ========================== -->
+
+    <div class="mobile-controls">
+
+        <button
+            onclick="moveLeft()">
+            ◀
+        </button>
+
+        <button
+            onclick="softDrop()">
+            ▼
+        </button>
+
+        <button
+            onclick="rotatePiece()">
+            ↻
+        </button>
+
+        <button
+            onclick="moveRight()">
+            ▶
+        </button>
+
+        <button
+            class="drop-button"
+            onclick="hardDrop()">
+            ⬇⬇
+        </button>
+
+    </div>
+
+
+</div>
+
+
+<script src="tetris.js"></script>
+
+</body>
+
+</html>
