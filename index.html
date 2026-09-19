@@ -50,42 +50,23 @@
     </main>
 
 
-    <script>
+   
+<script>
+    const gameURL = "https://srtg2k26-create.github.io/tetris-game/tetris.html";
 
-        /*
-         * IMPORTANT:
-         *
-         * Kapag na-upload na ito sa GitHub Pages,
-         * papalitan natin ang URL na ito ng actual
-         * GitHub Pages URL ng Tetris game.
-         *
-         * Example:
-         *
-         * https://username.github.io/tetris-game/tetris.html
-         */
+    new QRCode(document.getElementById("qrcode"), {
+        text: gameURL,
+        width: 220,
+        height: 220,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+    });
 
-        const gameURL =
-            "const gameURL =
-    "https://srtg2k26-create.github.io/tetris-game/tetris.html";
-
-
-        // Generate QR Code
-        new QRCode(document.getElementById("qrcode"), {
-            text: gameURL,
-            width: 240,
-            height: 240,
-            colorDark: "#000000",
-            colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.H
-        });
-
-
-        // Play button
-        function openGame() {
-            window.location.href = "tetris.html";
-        }
-
-    </script>
+    function playTetris() {
+        window.location.href = gameURL;
+    }
+</script>
 
 </body>
 </html>
